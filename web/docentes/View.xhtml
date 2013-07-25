@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="DocentesViewDlg" widgetVar="DocentesViewDialog" modal="true" resizable="false" appendToBody="true" header="#{bundle.ViewDocentesTitle}">
+
+            <h:form id="DocentesViewForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{docentesController.selected != null}">
+
+                        <h:outputText value="#{bundle.ViewDocentesLabel_dniDocente}"/>
+                        <h:outputText value="#{docentesController.selected.dniDocente}" title="#{bundle.ViewDocentesTitle_dniDocente}"/>
+
+                        <h:outputText value="#{bundle.ViewDocentesLabel_nomDocente}"/>
+                        <h:outputText value="#{docentesController.selected.nomDocente}" title="#{bundle.ViewDocentesTitle_nomDocente}"/>
+
+                        <h:outputText value="#{bundle.ViewDocentesLabel_apeDocente}"/>
+                        <h:outputText value="#{docentesController.selected.apeDocente}" title="#{bundle.ViewDocentesTitle_apeDocente}"/>
+
+                        <h:outputText value="#{bundle.ViewDocentesLabel_sueldo}"/>
+                        <h:outputText value="#{docentesController.selected.sueldo}" title="#{bundle.ViewDocentesTitle_sueldo}"/>
+
+                        <h:outputText value="#{bundle.ViewDocentesLabel_cursosCollection}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="DocentesViewDialog.hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

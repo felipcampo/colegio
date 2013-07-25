@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="AlumnosEditDlg" widgetVar="AlumnosEditDialog" modal="true" resizable="false" appendToBody="true" header="#{bundle.EditAlumnosTitle}">
+
+            <h:form id="AlumnosEditForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid  columns="2" rendered="#{alumnosController.selected != null}">
+
+                        <h:outputLabel value="#{bundle.EditAlumnosLabel_dniAlumno}" for="dniAlumno" />
+                        <h:outputText id="dniAlumno" value="#{alumnosController.selected.dniAlumno}" />
+
+                        <p:outputLabel value="#{bundle.EditAlumnosLabel_nomAlumno}" for="nomAlumno" />
+                        <p:inputText id="nomAlumno" value="#{alumnosController.selected.nomAlumno}" title="#{bundle.EditAlumnosTitle_nomAlumno}" required="true" requiredMessage="#{bundle.EditAlumnosRequiredMessage_nomAlumno}"/>
+
+                        <p:outputLabel value="#{bundle.EditAlumnosLabel_apeAlumno}" for="apeAlumno" />
+                        <p:inputText id="apeAlumno" value="#{alumnosController.selected.apeAlumno}" title="#{bundle.EditAlumnosTitle_apeAlumno}" required="true" requiredMessage="#{bundle.EditAlumnosRequiredMessage_apeAlumno}"/>
+
+                        <p:outputLabel value="#{bundle.EditAlumnosLabel_expCurso}" for="expCurso" />
+                        <p:selectOneMenu id="expCurso" value="#{alumnosController.selected.expCurso}" required="true" requiredMessage="#{bundle.EditAlumnosRequiredMessage_expCurso}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{cursosController.items}"
+                                           var="expCursoItem"
+                                           itemValue="#{expCursoItem}"
+                                           itemLabel="#{expCursoItem.expediente.toString()}"
+                                           />
+                            <f:converter binding="#{cursosConverter}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{alumnosController.save}" value="#{bundle.Save}" update="display,:AlumnosListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,AlumnosEditDialog);"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="AlumnosEditDialog.hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="AlumnosViewDlg" widgetVar="AlumnosViewDialog" modal="true" resizable="false" appendToBody="true" header="#{bundle.ViewAlumnosTitle}">
+
+            <h:form id="AlumnosViewForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{alumnosController.selected != null}">
+
+                        <h:outputText value="#{bundle.ViewAlumnosLabel_dniAlumno}"/>
+                        <h:outputText value="#{alumnosController.selected.dniAlumno}" title="#{bundle.ViewAlumnosTitle_dniAlumno}"/>
+
+                        <h:outputText value="#{bundle.ViewAlumnosLabel_nomAlumno}"/>
+                        <h:outputText value="#{alumnosController.selected.nomAlumno}" title="#{bundle.ViewAlumnosTitle_nomAlumno}"/>
+
+                        <h:outputText value="#{bundle.ViewAlumnosLabel_apeAlumno}"/>
+                        <h:outputText value="#{alumnosController.selected.apeAlumno}" title="#{bundle.ViewAlumnosTitle_apeAlumno}"/>
+
+                        <h:outputText value="#{bundle.ViewAlumnosLabel_expCurso}"/>
+                        <h:outputText value="#{alumnosController.selected.expCurso.expediente}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="AlumnosViewDialog.hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="AulasCreateDlg" widgetVar="AulasCreateDialog" modal="true" resizable="false" appendToBody="true" header="#{bundle.CreateAulasTitle}">
+
+            <h:form id="AulasCreateForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{aulasController.selected != null}">
+
+                        <p:outputLabel value="#{bundle.CreateAulasLabel_numAula}" for="numAula" />
+                        <p:inputText id="numAula" value="#{aulasController.selected.numAula}" title="#{bundle.CreateAulasTitle_numAula}" required="true" requiredMessage="#{bundle.CreateAulasRequiredMessage_numAula}"/>
+
+                        <p:outputLabel value="#{bundle.CreateAulasLabel_capacidad}" for="capacidad" />
+                        <p:inputText id="capacidad" value="#{aulasController.selected.capacidad}" title="#{bundle.CreateAulasTitle_capacidad}" required="true" requiredMessage="#{bundle.CreateAulasRequiredMessage_capacidad}"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{aulasController.saveNew}" value="#{bundle.Save}" update="display,:AulasListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,AulasCreateDialog);"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="AulasCreateDialog.hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

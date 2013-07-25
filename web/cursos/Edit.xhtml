@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CursosEditDlg" widgetVar="CursosEditDialog" modal="true" resizable="false" appendToBody="true" header="#{bundle.EditCursosTitle}">
+
+            <h:form id="CursosEditForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid  columns="2" rendered="#{cursosController.selected != null}">
+
+                        <h:outputLabel value="#{bundle.EditCursosLabel_expediente}" for="expediente" />
+                        <h:outputText id="expediente" value="#{cursosController.selected.expediente}" />
+
+                        <p:outputLabel value="#{bundle.EditCursosLabel_denominacion}" for="denominacion" />
+                        <p:inputText id="denominacion" value="#{cursosController.selected.denominacion}" title="#{bundle.EditCursosTitle_denominacion}" required="true" requiredMessage="#{bundle.EditCursosRequiredMessage_denominacion}"/>
+
+                        <p:outputLabel value="#{bundle.EditCursosLabel_duracion}" for="duracion" />
+                        <p:inputText id="duracion" value="#{cursosController.selected.duracion}" title="#{bundle.EditCursosTitle_duracion}" required="true" requiredMessage="#{bundle.EditCursosRequiredMessage_duracion}"/>
+
+                        <p:outputLabel value="#{bundle.EditCursosLabel_numAula}" for="numAula" />
+                        <p:selectOneMenu id="numAula" value="#{cursosController.selected.numAula}" required="true" requiredMessage="#{bundle.EditCursosRequiredMessage_numAula}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{aulasController.items}"
+                                           var="numAulaItem"
+                                           itemValue="#{numAulaItem}"
+                                           itemLabel="#{numAulaItem.numAula.toString()}"
+                                           />
+                            <f:converter binding="#{aulasConverter}"/>
+                        </p:selectOneMenu>
+
+                        <p:outputLabel value="#{bundle.EditCursosLabel_dniDocente}" for="dniDocente" />
+                        <p:selectOneMenu id="dniDocente" value="#{cursosController.selected.dniDocente}" required="true" requiredMessage="#{bundle.EditCursosRequiredMessage_dniDocente}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{docentesController.items}"
+                                           var="dniDocenteItem"
+                                           itemValue="#{dniDocenteItem}"
+                                           itemLabel="#{dniDocenteItem.dniDocente.toString()}"
+                                           />
+                            <f:converter binding="#{docentesConverter}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{cursosController.save}" value="#{bundle.Save}" update="display,:CursosListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,CursosEditDialog);"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="CursosEditDialog.hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

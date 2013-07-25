@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <h:form id="DocentesListForm">
+
+        <p:panel header="#{bundle.ListDocentesTitle}">
+
+            <p:dataTable id="datalist" value="#{docentesController.items}" var="item"
+                         selectionMode="single" selection="#{docentesController.selected}"
+                         rowKey="#{item.dniDocente}"
+                         paginator="true"
+                         rows="5"
+                         rowsPerPageTemplate="5,10,20,30"
+                         >
+
+                <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+
+                <p:column sortBy="#{item.dniDocente}" filterBy="#{item.dniDocente}">
+                    <f:facet name="header">
+                        <h:outputText value="#{bundle.ListDocentesTitle_dniDocente}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.dniDocente}"/>
+                </p:column>
+                <p:column sortBy="#{item.nomDocente}" filterBy="#{item.nomDocente}">
+                    <f:facet name="header">
+                        <h:outputText value="#{bundle.ListDocentesTitle_nomDocente}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.nomDocente}"/>
+                </p:column>
+                <p:column sortBy="#{item.apeDocente}" filterBy="#{item.apeDocente}">
+                    <f:facet name="header">
+                        <h:outputText value="#{bundle.ListDocentesTitle_apeDocente}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.apeDocente}"/>
+                </p:column>
+                <p:column sortBy="#{item.sueldo}" filterBy="#{item.sueldo}">
+                    <f:facet name="header">
+                        <h:outputText value="#{bundle.ListDocentesTitle_sueldo}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.sueldo}"/>
+                </p:column>
+                <f:facet name="footer">
+                    <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{docentesController.prepareCreate}" update=":DocentesCreateForm" oncomplete="DocentesCreateDialog.show()"/>
+                    <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":DocentesViewForm" oncomplete="DocentesViewDialog.show()" disabled="#{empty docentesController.selected}"/>
+                    <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":DocentesEditForm" oncomplete="DocentesEditDialog.show()" disabled="#{empty docentesController.selected}"/>
+                    <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{docentesController.delete}" update=":growl,datalist" disabled="#{empty docentesController.selected}"/>
+                </f:facet>
+
+            </p:dataTable>
+
+        </p:panel>
+
+    </h:form>
+
+</ui:composition>

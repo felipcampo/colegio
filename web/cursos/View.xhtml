@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CursosViewDlg" widgetVar="CursosViewDialog" modal="true" resizable="false" appendToBody="true" header="#{bundle.ViewCursosTitle}">
+
+            <h:form id="CursosViewForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{cursosController.selected != null}">
+
+                        <h:outputText value="#{bundle.ViewCursosLabel_expediente}"/>
+                        <h:outputText value="#{cursosController.selected.expediente}" title="#{bundle.ViewCursosTitle_expediente}"/>
+
+                        <h:outputText value="#{bundle.ViewCursosLabel_denominacion}"/>
+                        <h:outputText value="#{cursosController.selected.denominacion}" title="#{bundle.ViewCursosTitle_denominacion}"/>
+
+                        <h:outputText value="#{bundle.ViewCursosLabel_duracion}"/>
+                        <h:outputText value="#{cursosController.selected.duracion}" title="#{bundle.ViewCursosTitle_duracion}"/>
+
+                        <h:outputText value="#{bundle.ViewCursosLabel_numAula}"/>
+                        <h:outputText value="#{cursosController.selected.numAula.numAula}"/>
+
+                        <h:outputText value="#{bundle.ViewCursosLabel_dniDocente}"/>
+                        <h:outputText value="#{cursosController.selected.dniDocente.dniDocente}"/>
+
+                        <h:outputText value="#{bundle.ViewCursosLabel_alumnosCollection}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="CursosViewDialog.hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>
